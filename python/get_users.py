@@ -78,11 +78,13 @@ if(response.status_code == 200):
         # Loop through the list of users and print the relevant information.
         data = json.loads(response.content)["data"]
         print("\nThe User list is:\n")
+        print("\nuserName, fullName, dataRole\n")
         for item in data:
             username = item['userName']
             fullname = item['fullName']
             dataId = item['dataRoleId']
-            print(f'    Username = {username};  Full name = {fullname};  Data role ID = {dataId}')
+            #print(f'    Username = {username};  Full name = {fullname};  Data role ID = {dataId}')
+            print(f'{username}, {fullname}, {dataId}')
         print()
 
         # Get the list of data roles from the SMC
@@ -94,9 +96,18 @@ if(response.status_code == 200):
             raise RuntimeError("An error has occurred, while fetching users, with the following code: {}".format(response.status_code))
 
         # Print all the data roles
-        print('The defined Data Roles are:')
+        #print('The defined Data Roles are:')
         data = json.loads(response.content)["data"]
-        print(json.dumps(data, indent=4)) 
+        #print(json.dumps(data, indent=4))
+        print("\nThe defined Data Roles are:\n")
+        print("\nroleId, roleName, roleDescription")
+        for item in data:
+            role = item['id']
+            name = item['name']
+            description = item['description']
+            #print(f'    ID = {role}; Name = {name}; Description = {description}')
+            print(f'{role}, {name}, {description}')
+        print () 
 
     except RuntimeError as err:
         print(err.args[0])
@@ -107,5 +118,3 @@ if(response.status_code == 200):
 # If the login was unsuccessful
 else:
     print("An error has occurred, while logging in, with the following code {}".format(response.status_code))
-
-
