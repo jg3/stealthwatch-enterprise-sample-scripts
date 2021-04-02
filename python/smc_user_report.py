@@ -115,7 +115,7 @@ if(response.status_code == 200):
                 role = item['id']
                 name = item['name']
                 description = item['description']
-                print(f'{role}\t{name}\t{description}', file=output)
+                print(f'{role}, {name}, {description}', file=output)
                 if not QUIET:
                     print(f'{role}\t{name}\t{description}', file=sys.stdout)
 
@@ -131,7 +131,7 @@ if(response.status_code == 200):
             fRoles = json.loads(response.content)["data"]
             ###print(fRoles)
             print("\nThe defined Functional Roles are:\n" +
-                "ROLE\tNAME\tDESCRIPTION", file=output)
+                "ROLE, NAME, DESCRIPTION", file=output)
             if not QUIET:
                 print("\nThe defined Functional Roles are:\n" +
                     "ROLE\tNAME\tDESCRIPTION", file=sys.stdout)
@@ -139,7 +139,7 @@ if(response.status_code == 200):
                 role = item['id']
                 name = item['name']
                 description = item['description']
-                print(f'{role}\t{name}\t{description}', file=output)
+                print(f'{role}, {name}, {description}', file=output)
                 if not QUIET:
                     print(f'{role}\t{name}\t{description}', file=sys.stdout)
             
@@ -154,7 +154,7 @@ if(response.status_code == 200):
             # Print all the web functional roles
             wRoles = json.loads(response.content)["data"]
             print("\nThe defined Web Functional Roles are:\n" +
-                "ROLE\tNAME\tDESCRIPTION",
+                "ROLE, NAME, DESCRIPTION",
                 
                  file=output)
             if not QUIET:
@@ -164,7 +164,7 @@ if(response.status_code == 200):
                 role = item['id']
                 name = item['name']
                 description = item['description']
-                print(f'{role}\t{name}\t{description}', file=output)
+                print(f'{role}, {name}, {description}', file=output)
                 if not QUIET:
                     print(f'{role}\t{name}\t{description}', file=sys.stdout)
 
@@ -179,7 +179,7 @@ if(response.status_code == 200):
             # Loop through the list of users and print the relevant information.
             data = json.loads(response.content)["data"]
             print('\nThe User list is:\n' +
-                'USERNAME\tFULL NAME\tEMAIL\tIS ENABLED\tDATA ROLE\tFUNCTIONAL ROLES\tWEB FUNCTIONAL ROLES\tIS ADMIN', file=output)
+                'USERNAME, FULL NAME, EMAIL, IS ENABLED, DATA ROLE, FUNCTIONAL ROLES, WEB FUNCTIONAL ROLES, IS ADMIN', file=output)
             if not QUIET:
                 print('\nThe User list is:\n' +
                     'USERNAME\tFULL NAME\tEMAIL\t\tIS ENABLED\tDATA ROLE\t\tFUNCTIONAL ROLES\t\t\tWEB FUNCTIONAL ROLES\t\tIS ADMIN', file=sys.stdout)
@@ -195,16 +195,26 @@ if(response.status_code == 200):
                     email = "--"
                 enabled = item['enabled']
                 dataRole = next((i.get('name') for i in dRoles if i['id'] == item['dataRoleId']), "--")
+                
+                # these next two can contain multiple values:
+                # Get the list, look up the names, concatenate them into a single string for printing
                 funcRoles = []
                 for r in item['functionRoleIds']:
                     funcRoles.append(next((i.get('name') for i in fRoles if i['id'] == r), "--"))
+                funcRolesStr = "; "
+                funcRolesStr = funcRolesStr.join(funcRoles)
+
                 webRoles = []
                 for r in item['webFunctionRoleIds']:
-                    webRoles.append(next((i.get('name') for i in wRoles if i['id'] == r), "na"))
+                    webRoles.append(next((i.get('name') for i in wRoles if i['id'] == r), "--"))
+                webRolesStr = "; "
+                webRolesStr = webRolesStr.join(webRoles)
+
                 admin = item['isAdmin']
-                print(f'{username}\t{fullname}\t{email}\t{enabled}\t{dataRole}\t{funcRoles}\t{webRoles}\t{admin}', file=output)
+                print(f'{username}, {fullname}, {email}, {enabled}, {dataRole}, {funcRolesStr}, {webRolesStr}, {admin}', file=output)
                 if not QUIET:
-                    print(f'{username}\t\t{fullname}\t{email}\t\t{enabled}\t\t{dataRole}\t{funcRoles}\t{webRoles}\t{admin}', file=sys.stdout)
+                    print(f'{username}\t\t{fullname}\t{email}\t\t{enabled}\t\t{dataRole}\t{funcRolesStr}\t{webRolesStr}\t{admin}', file=sys.stdout)
+
             
             if not QUIET:
                 print("\n  " + sys.argv[0] + " done.  Check for output in " + OUTPUT_FILE)
