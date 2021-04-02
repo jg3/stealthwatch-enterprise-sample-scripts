@@ -1,0 +1,48 @@
+Data current as of: 2021-04-01 12:12:52
+
+
+The defined Data Roles are:
+
+roleId	roleName	roleDescription
+352	Class2010	Dawson played 1976-1986  (more games than with any other club)
+353	Class2018	Gurrero played 1996-2003
+354	Class2015	Johnson spent 1988-1999  Martinez played 1994-1997
+355	Class2000	Perez played 1977-1979
+356	Class2017	Raines played 1979-1990  (more games than with any other club) Rodríguez played 2010
+357	Class1982	Robinson managed 2002-2004
+358	Class2019	Smith played 1997
+359	Class2008	Williams played 1977-81
+351	Class2003	Carter played 1974-1984, 1992 (more games than with any other club)
+1	All Data (Read Only)	All Data (Read Only)
+0	All Data (Read & Write)	All Data (Read & Write)
+
+The defined Functional Roles are:
+ROLE	NAME	DESCRIPTION
+10	Configuration Manager	Can configure appliances and domain settings.
+11	Network Engineer	Can view all traffic related functions.
+13	StealthWatch Power User	Can view all functions other than configuration items.
+15	Security Analyst	Can view all security related functions.
+0	All	All Functions
+
+The defined Web Functional Roles are:
+ROLE	NAME	DESCRIPTION
+1	Master Admin	Master Admin
+2	Configuration Manager	Configuration Manager
+3	Analyst	Analyst
+4	Power Analyst	Power Analyst
+
+The User list is:
+USERNAME	FULL NAME	EMAIL	IS ENABLED	DATA ROLE	FUNCTIONAL ROLES	WEB FUNCTIONAL ROLES	IS ADMIN
+Gary	Gary Carter	--	True	Class2003	['Network Engineer', 'Security Analyst']	['Analyst']	False
+Tony	Tony Perez	--	True	Class2000	['Network Engineer', 'Security Analyst']	['Analyst']	False
+Randy	Randy Johnson	--	True	Class2015	['Network Engineer', 'Security Analyst']	['Analyst']	False
+jamegill	James	jamegill@cisco.com	True	All Data (Read & Write)	['All']	['Master Admin']	True
+admin	Admin User	--	True	All Data (Read & Write)	['All']	['Master Admin']	True
+Andre	--	--	True	Class2010	['Network Engineer', 'Security Analyst']	['Analyst']	False
+Lee	Lee Smith	--	True	Class2019	['Network Engineer', 'Security Analyst']	['Analyst']	False
+Dick	Dick Williams	--	True	Class2008	['Network Engineer', 'Security Analyst']	['Analyst']	False
+Vladmir	Vladmir Gurrerro	--	True	Class2018	['Network Engineer', 'Security Analyst']	['Analyst']	False
+Ivan	Iván Rodríguez	--	True	Class2017	['Network Engineer', 'Security Analyst']	['Analyst']	False
+Tim	Tim Raines	--	True	Class2017	['Network Engineer', 'Security Analyst']	['Analyst']	False
+Pedro	Pedro Martinez	--	True	Class2015	['Network Engineer', 'Security Analyst']	['Analyst']	False
+Frank	Frank Robinson	--	True	Class1982	['All']	['Configuration Manager', 'Analyst']	False
